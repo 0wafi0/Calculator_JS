@@ -13,12 +13,29 @@
 </head>
 
 <body>
-	<div id="main-container">
-		<div id="display">
-			
+	<div class="main-container">
+		<div class="display">
+			<input id="disp-out" type="number" placeholder="0" readonly="readonly">
 		</div>
-		<div id="panel">
-			<div></div>
+		<div class="panel">	
+			<button class="btn op" data-action="add">&#43</button>			
+			<button class="btn op" data-action="subtract">&#8722;</button>
+			<button class="btn op" data-action="mulriply">&#215</button>
+			<button class="btn op" data-action="divide">&#247;</button>		
+			<button class="btn no">7</button>
+			<button class="btn no">8</button>
+			<button class="btn no">9</button>
+			<button class="btn op" data-action="root">&#8730;</button>		
+			<button class="btn no">4</button>
+			<button class="btn no">5</button>
+			<button class="btn no">6</button>
+			<button class="btn ac" data-action="reset">AC</button>
+			<button class="btn no">1</button>
+			<button class="btn no">2</button>
+			<button class="btn no">3</button>
+			<button class="btn equals" data-action="calculate">&#61;</button>			
+			<button class="btn no zero">0</button>
+			<button class="btn no dot" data-action="decimal">.</button>
 		</div>		
 	</div>
  	<script src="scripts.js"></script>
