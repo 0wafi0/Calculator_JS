@@ -6,52 +6,52 @@ let operation = "";
 let value = "0";
 
 keys.addEventListener('click', e => {
-	
 	if(e.target.matches('button')) {
-		
 		const action = e.target.getAttribute('data-action');
+		const overflow = document.getElementById('display').innerHTML.length < 8;		
+		if(overflow || action || pressed) {
+			if(action) {		
+				switch (action) {
+					case "reset":
+						Clear(e);
+						break;
+					case "decimal":
+						if(!decimal) {
+							AddDigit(e);
+							decimal = true;
+							pressed = false;
+						}
+						break;
+					case "add":
+						Operate(e, action);
+						break;
+					case "subtract":
+						Operate(e, action);		
+						break;
+					case "multiply":
+						Operate(e, action);
+						break;
+					case "divide":
+						Operate(e, action);		
+						break;
+					case "calculate":
+							Calculate(e);
+							operation = "";
+							decimal = false;
+							value = 0;
+							pressed = true;
+						break;
+				}
+			}
+			else {			
+				if(pressed) {
+					ReplaceDigit(e);
+				} else {
+					AddDigit(e);
+				}
+			}
+		}
 		
-		if(action) {
-			switch (action) {
-				case "reset":
-					Clear(e);
-					break;
-				case "decimal":
-					if(!decimal) {
-						AddDigit(e);
-						decimal = true;
-						pressed = false;
-					}
-					break;
-				case "add":
-					Operate(e, action);			
-					break;
-				case "subtract":
-					Operate(e, action);		
-					break;
-				case "multiply":
-					Operate(e, action);
-					break;
-				case "divide":
-					Operate(e, action);		
-					break;
-				case "calculate":
-						Calculate(e);
-						operation = "";
-						decimal = false;
-						value = 0;
-						pressed = true;
-					break;
-			}
-		}
-		else {			
-			if(pressed) {
-				ReplaceDigit(e);
-			} else {
-				AddDigit(e);
-			}
-			
-		}
 	}
 });
 
@@ -72,11 +72,13 @@ function Clear(e) {
 	operation = "";
 	decimal = false;
 	pressed = true;
+	PressedRemoveAll();
 }
 
 function Calculate(e) {
 	let output = Number(value);
 	let currentInput = Number(document.getElementById('display').textContent);
+	PressedRemoveAll();
 	switch (operation) {
 		case "add":		
 			output += currentInput
@@ -95,6 +97,11 @@ function Calculate(e) {
 			document.getElementById('display').textContent = output;
 			break;
 	}
+	document.getElementById('display').textContent = parseFloat(document.getElementById('display').textContent).toFixed(5);
+	if(!(document.getElementById('display').innerHTML.length < 8)) {
+		output = parseFloat(document.getElementById('display').textContent).toFixed(2);
+		document.getElementById('display').textContent = "error";
+	}
 }
 
 function Operate(e, action) {
@@ -102,12 +109,22 @@ function Operate(e, action) {
 		operation = action;
 		value = document.getElementById('display').textContent;
 		pressed = true;
+		e.target.classList.add('pressed');
 	} else 	{
+		PressedRemoveAll()
 		operation = action;
 		if(!pressed) {
 			Calculate(e);
 		}	
 		pressed = true;
 		value = document.getElementById('display').textContent;
+		e.target.classList.add('pressed');
 	}					
+}
+
+function PressedRemoveAll(){
+	const items = document.getElementsByClassName('op');
+	for(let item of items) {
+		item.classList.remove('pressed');
+	}
 }

@@ -57,10 +57,11 @@ body {
 	box-sizing: border-box;
 	background-repeat: no-repeat;
     background-size: 100% 100%;
+	
 }
 
 .main-container {
-	
+	font-family: 'Roboto', sans-serif;
 	position: absolute;
 	width: 400px;
 	height: 600px;	
@@ -97,6 +98,37 @@ body {
 	grid-gap: 16px;
 }
 
+/* ================================ Ripple CSS ================================ */
+.ripple {
+	position: relative;
+	overflow: hidden;
+	transform: translate3d(0, 0, 0);
+  }
+
+.ripple:after {
+   content: "";
+  	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
+	background-repeat: no-repeat;
+	background-position: 50%;
+	transform: scale(10, 10);
+	opacity: 0;
+	transition: transform .5s, opacity 1s;
+}
+
+.ripple:active:after {
+	transform: scale(0, 0);
+	opacity: .2;
+	transition: 0s;
+}
+
+
 
 /* ================================ Buttons  ================================*/
 
@@ -125,9 +157,13 @@ body {
 
 .equals {
 	background-color: #c8d6c2;
-	grid-row: span 2;
+	grid-row: span 3;
 }
 
 .ac {
 	background-color: #c49797;
+}
+
+.pressed { 
+	 box-shadow: inset 0px 0px 32px rgba(0, 0, 0, 0.9);
 }
