@@ -97,10 +97,12 @@ function Calculate(e) {
 			document.getElementById('display').textContent = output;
 			break;
 	}
-	document.getElementById('display').textContent = parseFloat(document.getElementById('display').textContent).toFixed(5);
 	if(!(document.getElementById('display').innerHTML.length < 8)) {
-		output = parseFloat(document.getElementById('display').textContent).toFixed(2);
-		document.getElementById('display').textContent = "error";
+		document.getElementById('display').textContent = parseFloat(document.getElementById('display').textContent).toFixed(2);
+		if(!(document.getElementById('display').innerHTML.length < 8)) {
+				document.getElementById('display').textContent = "error";
+		}
+	
 	}
 }
 
