@@ -113,11 +113,11 @@ function Operate(e, action) {
 		pressed = true;
 		e.target.classList.add('pressed');
 	} else 	{
-		PressedRemoveAll()
-		operation = action;
+		PressedRemoveAll()	
 		if(!pressed) {
 			Calculate(e);
-		}	
+		}
+		operation = action;
 		pressed = true;
 		value = document.getElementById('display').textContent;
 		e.target.classList.add('pressed');
