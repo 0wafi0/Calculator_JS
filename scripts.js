@@ -65,6 +65,7 @@ function ReplaceDigit(e) {
 	const pressedValue = e.target.textContent;
 	document.getElementById('display').textContent = pressedValue;
 	pressed = false;
+	PressedRemoveAll();
 }
 
 function Clear(e) {
